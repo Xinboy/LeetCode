@@ -141,6 +141,30 @@ class Solution: NSObject {
         return strArray.joined(separator: " ")
     }
     
+    let keyboardList = [["q","w","e","r","t","y","u","i","o","p"],
+                        ["a","s","d","f","g","h","j","k","l"],
+                        ["z","x","c","v","b","n","m"]]
+    
+    func findWords(_ words: [String]) -> [String] {
+        var outArray: [String] = []
+        for word in words {
+            for list in keyboardList {
+                for index in word.indices {
+                    if list.contains(String(word[index]).lowercased()) {
+                        if index.encodedOffset == word.endIndex.encodedOffset - 1 {
+                            outArray.append(word)
+                            break
+                        }
+                        continue
+                    } else {
+                        break
+                    }
+                }
+            }
+        }
+        return outArray
+    }
+    
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

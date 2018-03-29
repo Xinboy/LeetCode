@@ -528,6 +528,21 @@ class Solution: NSObject {
         }
         return encodingSet.count
     }
+    
+    // MARK: - 806. Number of Lines To Write String
+    func numberOfLines_806(_ widths: [Int], _ S: String) -> [Int] {
+        var lineCount = 1
+        var units = 0
+        for scalar in S.unicodeScalars {
+            if units + widths[scalar.hashValue - 97] > 100 {
+                lineCount += 1
+                units = widths[scalar.hashValue - 97]
+            } else {
+                units += widths[scalar.hashValue - 97]
+            }
+        }
+        return [lineCount, units]
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

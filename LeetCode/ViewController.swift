@@ -13,20 +13,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(self.uniqueMorseRepresentations(["g", "zasadadasdasdaen", "gig", "msg"]))
+        print(self.numberOfLines([3,10,2,1,10,10,10,10,10,2,10,10,10,10,93,10,22,12,10,10,10,12,10,10,10,10], "asdjkajsdljfasdjjqweoiqutyzxocnmzzxcmnvsadasdlpqweoriwqweosczxkc"))
     }
-    let encoding = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
-
-    func uniqueMorseRepresentations(_ words: [String]) -> Int {
-        var encodingSet = Set<String>()
-        for word in words {
-            var string = ""
-            for scalar in word.unicodeScalars {
-                string.append(encoding[scalar.hashValue - 97])
+    
+    func numberOfLines(_ widths: [Int], _ S: String) -> [Int] {
+        var lineCount = 1
+        var units = 0
+        for scalar in S.unicodeScalars {
+            if units + widths[scalar.hashValue - 97] > 100 {
+                lineCount += 1
+                units = widths[scalar.hashValue - 97]
+            } else {
+                units += widths[scalar.hashValue - 97]
             }
-            encodingSet.insert(string)
         }
-        return encodingSet.count
+        return [lineCount, units]
     }
 
     override func didReceiveMemoryWarning() {

@@ -500,6 +500,20 @@ class Solution: NSObject {
     func addDigits_258_best(_ num: Int) -> Int {
         return 1 + (num - 1) % 9
     }
+    
+    // MARK: - 283. Move Zeroes
+    func moveZeroes_283(_ nums: inout [Int]) {
+        var end = nums.count - 1
+        if nums.contains(0) {
+            while end > -1 {
+                if nums[end] == 0 {
+                    nums.append(0)
+                    nums.remove(at: end)
+                }
+                end -= 1
+            }
+        }
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

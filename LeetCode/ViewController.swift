@@ -13,7 +13,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        var nums = [0,1]
+        self.moveZeroes(&nums)
+    }
+    func moveZeroes(_ nums: inout [Int]) {
+        var end = nums.count - 1
+        if nums.contains(0) {
+            while end > -1 {
+                if nums[end] == 0 {
+                    nums.append(0)
+                    nums.remove(at: end)
+                }
+                end -= 1
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

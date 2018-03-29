@@ -514,6 +514,20 @@ class Solution: NSObject {
             }
         }
     }
+    
+    // MARK: - 804. Unique Morse Code Words
+    let encoding = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+    func uniqueMorseRepresentations_804(_ words: [String]) -> Int {
+        var encodingSet = Set<String>()
+        for word in words {
+            var string = ""
+            for scalar in word.unicodeScalars {
+                string.append(encoding[scalar.hashValue - 97])
+            }
+            encodingSet.insert(string)
+        }
+        return encodingSet.count
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

@@ -13,20 +13,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var nums = [0,1]
-        self.moveZeroes(&nums)
+        print(self.uniqueMorseRepresentations(["g", "zasadadasdasdaen", "gig", "msg"]))
     }
-    func moveZeroes(_ nums: inout [Int]) {
-        var end = nums.count - 1
-        if nums.contains(0) {
-            while end > -1 {
-                if nums[end] == 0 {
-                    nums.append(0)
-                    nums.remove(at: end)
-                }
-                end -= 1
+    let encoding = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+
+    func uniqueMorseRepresentations(_ words: [String]) -> Int {
+        var encodingSet = Set<String>()
+        for word in words {
+            var string = ""
+            for scalar in word.unicodeScalars {
+                string.append(encoding[scalar.hashValue - 97])
             }
+            encodingSet.insert(string)
         }
+        return encodingSet.count
     }
 
     override func didReceiveMemoryWarning() {

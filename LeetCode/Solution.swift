@@ -543,6 +543,18 @@ class Solution: NSObject {
         }
         return [lineCount, units]
     }
+    // MARK: - 389. Find the Difference
+    func findTheDifference_389(_ s: String, _ t: String) -> Character {
+        var result = 0
+        for sEn in s.unicodeScalars {
+            result ^= sEn.hashValue
+        }
+        for tEn in t.unicodeScalars {
+            result ^= tEn.hashValue
+        }
+        return Character(UnicodeScalar(result)!)
+    }
+    
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

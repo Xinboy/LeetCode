@@ -13,19 +13,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(self.findTheDifference("abcde", "cbased"))
+        print(self.findDisappearedNumbers([4,3,2,7,8,2,3,1]))
     }
     
-    func findTheDifference(_ s: String, _ t: String) -> Character {
-        var result = 0
-        for sEn in s.unicodeScalars {
-            result ^= sEn.hashValue
-        }
-        for tEn in t.unicodeScalars {
-            result ^= tEn.hashValue
-        }
-        return Character(UnicodeScalar(result)!)
-    }
+    
     
 
 

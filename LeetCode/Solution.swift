@@ -554,7 +554,41 @@ class Solution: NSObject {
         }
         return Character(UnicodeScalar(result)!)
     }
+    // MARK: - 448. Find All Numbers Disappeared in an Array
+    func findDisappearedNumbers_448_mine(_ nums: [Int]) -> [Int] {
+        let n = nums.count
+        var result: [Int] = []
+        let numsSet = Set(nums)
+        var i = 1
+        while i <= n {
+            if !numsSet.contains(i) {
+                result.append(i)
+            }
+            i += 1
+            if result.count == nums.count - numsSet.count {
+                break
+            }
+        }
+        return result
+    }
     
+    func findDisappearedNumbers_448_best(_ nums: [Int]) -> [Int] {
+        var res = [Int]()
+        var nums = nums
+        for i in 0..<nums.count{
+            var val = abs(nums[i]) - 1
+            if nums[val] > 0{
+                nums[val] = -nums[val]
+            }
+        }
+        
+        for i in 0..<nums.count{
+            if nums[i]>0{
+                res.append(i+1)
+            }
+        }
+        return res
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

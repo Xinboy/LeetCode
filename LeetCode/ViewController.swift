@@ -13,32 +13,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
-        
-        self.getSum(3, 1)
+        print(self.rotatedDigits(30))
         
         
     }
-    func getSum(_ a: Int, _ b: Int) -> Int {
-        let c = a & b
-        let r = a ^ b
-        return c == 0 ? r :(self.getSum(r, c << 1))
-    }
-    
-    func getSum(_ a: Int, _ b: Int) -> Int {
-        if a == 0 {
-            return b
+    func rotatedDigits(_ N: Int) -> Int {
+        var count = 0
+        for num in 1..<N+1 {
+            let numStr = String(num)
+            if (!numStr.contains("3") && !numStr.contains("4") && !numStr.contains("7")) {
+                if (numStr.contains("2") || numStr.contains("5") || numStr.contains("6") || numStr.contains("9")) {
+                    count += 1
+                }
+            }
         }
-        
-        if b == 0{
-            return a
-        }
-        var sum = a ^ b
-        var carry = (a & b) << 1
-        
-        return getSum(sum,carry)
+        return count
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

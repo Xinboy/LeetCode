@@ -594,7 +594,7 @@ class Solution: NSObject {
     func getSum_371_mine(_ a: Int, _ b: Int) -> Int {
         let c = a & b
         let r = a ^ b
-        return c == 0 ? r :(self.getSum(r, c << 1))
+        return c == 0 ? r :(getSum_371_mine(r, c << 1))
     }
     
     func getSum_371_best(_ a: Int, _ b: Int) -> Int {
@@ -605,10 +605,43 @@ class Solution: NSObject {
         if b == 0{
             return a
         }
-        var sum = a ^ b
-        var carry = (a & b) << 1
+        let sum = a ^ b
+        let carry = (a & b) << 1
         
-        return getSum(sum,carry)
+        return getSum_371_best(sum,carry)
+    }
+    
+    // MARK: - 788. Rotated Digits
+    func rotatedDigits_788_mine(_ N: Int) -> Int {
+        var count = 0
+        for num in 1..<N+1 {
+            let numStr = String(num)
+            if (!numStr.contains("3") && !numStr.contains("4") && !numStr.contains("7")) {
+                if (numStr.contains("2") || numStr.contains("5") || numStr.contains("6") || numStr.contains("9")) {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+    
+    func good_788_best( n:Int, flag:Bool)->Bool{
+        if (n == 0) {return flag}
+        
+        let d = n % 10
+        if (d == 3 || d == 4 || d == 7) {return false}
+        if (d == 0 || d == 1 || d == 8) {return good_788_best(n: n/10, flag: flag)}
+        return good_788_best(n: n/10, flag: true)//good(n / 10, true)
+    }
+    
+    func rotatedDigits_788_best(_ N: Int) -> Int {
+        var goodNumCount = 0
+        for n in 1...N{
+            if good_788_best(n: n, flag: false){
+                goodNumCount += 1
+            }
+        }
+        return goodNumCount
     }
     
     //MARK:- 私有方法

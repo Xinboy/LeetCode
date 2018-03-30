@@ -576,7 +576,7 @@ class Solution: NSObject {
         var res = [Int]()
         var nums = nums
         for i in 0..<nums.count{
-            var val = abs(nums[i]) - 1
+            let val = abs(nums[i]) - 1
             if nums[val] > 0{
                 nums[val] = -nums[val]
             }
@@ -589,6 +589,28 @@ class Solution: NSObject {
         }
         return res
     }
+    
+    // MARK: - 371. Sum of Two Integers
+    func getSum_371_mine(_ a: Int, _ b: Int) -> Int {
+        let c = a & b
+        let r = a ^ b
+        return c == 0 ? r :(self.getSum(r, c << 1))
+    }
+    
+    func getSum_371_best(_ a: Int, _ b: Int) -> Int {
+        if a == 0 {
+            return b
+        }
+        
+        if b == 0{
+            return a
+        }
+        var sum = a ^ b
+        var carry = (a & b) << 1
+        
+        return getSum(sum,carry)
+    }
+    
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

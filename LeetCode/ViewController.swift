@@ -13,11 +13,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(self.findDisappearedNumbers([4,3,2,7,8,2,3,1]))
+    
+        
+        self.getSum(3, 1)
+        
+        
+    }
+    func getSum(_ a: Int, _ b: Int) -> Int {
+        let c = a & b
+        let r = a ^ b
+        return c == 0 ? r :(self.getSum(r, c << 1))
     }
     
-    
-    
+    func getSum(_ a: Int, _ b: Int) -> Int {
+        if a == 0 {
+            return b
+        }
+        
+        if b == 0{
+            return a
+        }
+        var sum = a ^ b
+        var carry = (a & b) << 1
+        
+        return getSum(sum,carry)
+    }
 
 
     override func didReceiveMemoryWarning() {

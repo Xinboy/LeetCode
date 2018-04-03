@@ -680,6 +680,19 @@ class Solution: NSObject {
         return sum
     }
     
+    // MARK: - 349. Intersection of Two Arrays
+    func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        let num1Set = Set(nums1)
+        let num2Set = Set(nums2)
+        var result = [Int]()
+        
+        for i in num2Set {
+            if num1Set.contains(i) {
+                result.append(i)
+            }
+        }
+        return result
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

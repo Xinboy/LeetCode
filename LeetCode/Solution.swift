@@ -644,6 +644,42 @@ class Solution: NSObject {
         return goodNumCount
     }
     
+    // MARK: - 171. Excel Sheet Column Number
+    let columnDict = ["A":1,"B":2,"C":3,
+                      "D":4,"E":5,"F":6,
+                      "G":7,"H":8,"I":9,
+                      "J":10,"K":11,"L":12,
+                      "M":13,"N":14,"O":15,
+                      "P":16,"Q":17,"R":18,
+                      "S":19,"T":20,"U":21,
+                      "V":22,"W":23,"X":24,
+                      "Y":25,"Z":26]
+    
+    func titleToNumber_171_mine(_ s: String) -> Int {
+        if s.count == 1 {
+            return columnDict[s]!
+        } else {
+            var result = columnDict[String(s[s.startIndex])]!
+            for index in s.indices {
+                if index == s.index(s.endIndex, offsetBy: -1) {
+                    return result
+                } else {
+                    result = result * 26 + columnDict[String(s[s.index(index, offsetBy: 1)])]!
+                }
+            }
+            return result
+        }
+    }
+    
+    func titleToNumber_171_best(_ s: String) -> Int {
+        var sum = 0
+        for char in s.unicodeScalars  {
+            sum *= 26
+            sum += (Int(char.value) - 64)
+        }
+        return sum
+    }
+    
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

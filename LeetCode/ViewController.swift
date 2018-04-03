@@ -13,21 +13,35 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(self.rotatedDigits(30))
-        
-        
     }
-    func rotatedDigits(_ N: Int) -> Int {
-        var count = 0
-        for num in 1..<N+1 {
-            let numStr = String(num)
-            if (!numStr.contains("3") && !numStr.contains("4") && !numStr.contains("7")) {
-                if (numStr.contains("2") || numStr.contains("5") || numStr.contains("6") || numStr.contains("9")) {
-                    count += 1
+    
+    func subdomainVisits(_ cpdomains: [String]) -> [String] {
+        var resultDomains = [String: Int]()
+        
+        for str in cpdomains {
+            let temp = str.components(separatedBy: " ")
+            resultDomains[temp[1]] = Int(temp[0])
+        }
+        for (key, value) in resultDomains {
+            for index in key.indices {
+                if key[index] == "." {
+                    let temp = String(key[key.index(after: index)...key.index(before: key.endIndex)])
+                    if resultDomains.keys.contains(temp) {
+                        let newTimes = resultDomains[temp]! + value
+                        resultDomains[temp] = newTimes
+                    } else {
+                        resultDomains[temp] = value
+                    }
                 }
             }
+            
         }
-        return count
+        var result = [String]()
+        for (key, value) in resultDomains {
+            result.append("\(value) \(key)")
+        }
+        return result
+        
     }
 
     override func didReceiveMemoryWarning() {

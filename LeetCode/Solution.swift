@@ -693,6 +693,16 @@ class Solution: NSObject {
         }
         return result
     }
+    
+    // MARK: - 598. Range Addition II
+    func maxCount(_ m: Int, _ n: Int, _ ops: [[Int]]) -> Int {
+        var min1 = m, min2 = n
+        for op in ops {
+            min1 = min(op.first!, min1)
+            min2 = min(op.last!, min2)
+        }
+        return min1 * min2
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     }
     
     
+    
     func subdomainVisits(_ cpdomains: [String]) -> [String] {
         var resultDomains = [String: Int]()
         

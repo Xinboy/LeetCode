@@ -703,6 +703,61 @@ class Solution: NSObject {
         }
         return min1 * min2
     }
+    
+    // MARK: - 13. Roman to Integer
+    let romanDict = ["I": 1, "V": 5, "X": 10, "C": 100, "M": 1000, "L": 50, "D": 500]
+    func romanToInt_13_mine(_ s: String) -> Int {
+        var result = 0
+        var i = 0
+        for index in s.indices {
+            if i >= s.count - 1 || romanDict[String(s[s.index(after: index)])]! <= romanDict[String(s[index])]! {
+                result += romanDict[String(s[index])]!
+            } else {
+                result -= romanDict[String(s[index])]!
+            }
+            i += 1
+        }
+        return result
+    }
+    
+    func charToNum(_ c: Character) -> Int {
+        switch(c) {
+        case "M":
+            return 1000
+        case "D":
+            return 500
+        case "C":
+            return 100
+        case "L":
+            return 50
+        case "X":
+            return 10
+        case "V":
+            return 5
+        case "I":
+            return 1
+        default:
+            return 0
+        }
+    }
+    func romanToInt_13_best(_ s: String) -> Int {
+        var prev = 0
+        var ret = 0
+        
+        for c in s.characters.reversed() {
+            var val = charToNum(c)
+            
+            if val < prev {
+                ret -= val
+            } else {
+                ret += val
+                prev = val
+            }
+            
+        }
+        
+        return ret
+    }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number

@@ -720,6 +720,7 @@ class Solution: NSObject {
         return result
     }
     
+
     func charToNum(_ c: Character) -> Int {
         switch(c) {
         case "M":
@@ -744,8 +745,8 @@ class Solution: NSObject {
         var prev = 0
         var ret = 0
         
-        for c in s.characters.reversed() {
-            var val = charToNum(c)
+        for c in s.reversed() {
+            let val = charToNum(c)
             
             if val < prev {
                 ret -= val
@@ -757,6 +758,15 @@ class Solution: NSObject {
         }
         
         return ret
+    }
+    
+    // MARK: - 453. Minimum Moves to Equal Array Elements
+    func minMoves_453(_ nums: [Int]) -> Int {
+        var sum = 0
+        for i in nums {
+            sum += i
+        }
+        return sum - nums.min()! * nums.count
     }
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {

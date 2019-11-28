@@ -14,7 +14,8 @@
 		72498631204E30FB00A247C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7249862F204E30FB00A247C0 /* LaunchScreen.storyboard */; };
 		7249863C204E30FC00A247C0 /* LeetCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249863B204E30FC00A247C0 /* LeetCodeTests.swift */; };
 		72498647204E30FC00A247C0 /* LeetCodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72498646204E30FC00A247C0 /* LeetCodeUITests.swift */; };
-		72498655204E311400A247C0 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72498654204E311400A247C0 /* Solution.swift */; };
+		72498655204E311400A247C0 /* SolutionSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72498654204E311400A247C0 /* SolutionSimple.swift */; };
+		72D324B923898AE400B3BE7D /* SortSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D324B823898AE400B3BE7D /* SortSimple.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +49,8 @@
 		72498642204E30FC00A247C0 /* LeetCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72498646204E30FC00A247C0 /* LeetCodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUITests.swift; sourceTree = "<group>"; };
 		72498648204E30FC00A247C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72498654204E311400A247C0 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
+		72498654204E311400A247C0 /* SolutionSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionSimple.swift; sourceTree = "<group>"; };
+		72D324B823898AE400B3BE7D /* SortSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSimple.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +103,12 @@
 			children = (
 				72498626204E30FB00A247C0 /* AppDelegate.swift */,
 				72498628204E30FB00A247C0 /* ViewController.swift */,
-				72498654204E311400A247C0 /* Solution.swift */,
+				72498654204E311400A247C0 /* SolutionSimple.swift */,
+				72D324B823898AE400B3BE7D /* SortSimple.swift */,
+				72498632204E30FB00A247C0 /* Info.plist */,
 				7249862A204E30FB00A247C0 /* Main.storyboard */,
 				7249862D204E30FB00A247C0 /* Assets.xcassets */,
 				7249862F204E30FB00A247C0 /* LaunchScreen.storyboard */,
-				72498632204E30FB00A247C0 /* Info.plist */,
 			);
 			path = LeetCode;
 			sourceTree = "<group>";
@@ -263,8 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				72498629204E30FB00A247C0 /* ViewController.swift in Sources */,
+				72D324B923898AE400B3BE7D /* SortSimple.swift in Sources */,
 				72498627204E30FB00A247C0 /* AppDelegate.swift in Sources */,
-				72498655204E311400A247C0 /* Solution.swift in Sources */,
+				72498655204E311400A247C0 /* SolutionSimple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +435,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XD2M76FLUH;
+				DEVELOPMENT_TEAM = STQ26GZD4B;
 				INFOPLIST_FILE = LeetCode/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Xinbo.LeetCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -446,8 +451,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XD2M76FLUH;
+				DEVELOPMENT_TEAM = STQ26GZD4B;
 				INFOPLIST_FILE = LeetCode/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Xinbo.LeetCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";

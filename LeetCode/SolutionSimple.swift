@@ -9,7 +9,7 @@
 
 import UIKit
 
-class Solution: NSObject {
+class SolutionSimple: NSObject {
     // MARK: - 1. Two Sum
     func twoSum_1(_ nums: [Int], _ target: Int) -> [Int] {
         for i in 0..<nums.count {
@@ -21,6 +21,414 @@ class Solution: NSObject {
         }
         return [0,0]
     }
+    
+    // MARK: - 2. Two Sum
+    func addTwoNumbers_2(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var resultNode: ListNode?, curNode1: ListNode? ,curNode2: ListNode?
+        curNode1 = l1
+        curNode2 = l2
+        resultNode = ListNode.init(0)
+        let dummy = resultNode
+        
+        var carry = 0
+        while curNode1 != nil || curNode2 != nil {
+            let var1 = curNode1?.val ?? 0
+            let var2 = curNode2?.val ?? 0
+            let sum = var1 + var2 + carry
+            carry = sum / 10
+            
+            resultNode?.next = ListNode.init(sum % 10)
+            
+            resultNode = resultNode?.next
+            curNode1 = curNode1?.next
+            curNode2 = curNode2?.next
+        }
+        if carry > 0 {
+            resultNode?.next = ListNode.init(carry)
+        }
+        return dummy?.next
+    }
+    
+    // MARK: - 7. 反转整数
+    func reverse_7(_ x: Int) -> Int {
+        var result = 0
+        var x1 = x
+        while x1 != 0 {
+            let b = x1 % 10
+            result = result * 10 + b
+            x1 = x1 / 10
+        }
+        if result > Int32.max || result < Int32.min {
+            return 0
+        } else {
+            return result
+        }
+    }
+    
+    // MARK: -  9. 回文数
+    func isPalindrome_9(_ x: Int) -> Bool {
+        if x < 0 {
+            return false
+        }
+        var result = 0
+        var x1 = x
+        while x1 != 0 {
+            let b = x1 % 10
+            result = result * 10 + b
+            x1 = x1 / 10
+        }
+        if result == x {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    // MARK: - 14. 最长公共前缀
+    func longestCommonPrefix_14_mine(_ strs: [String]) -> String {
+        var result = ""
+        if strs.count == 1 {
+            return strs.first!
+        } else if strs.count == 0 {
+            return ""
+        } else {
+            let firsts = strs.first!
+            var index = 0
+            
+            while index < firsts.count {
+                let mid = firsts.index(firsts.startIndex, offsetBy: index)
+                let a = firsts[...mid]
+                
+                for i in 1..<strs.count {
+                    let string = strs[i]
+                    if mid == string.endIndex {
+                        return result
+                    } else {
+                        let b = string[...mid]
+                        if a == b {
+                            if i != strs.count - 1 {
+                                continue
+                            } else {
+                                result = String(a)
+                            }
+                        } else {
+                            return result
+                        }
+                    }
+                }
+                index = index + 1
+            }
+            return result
+        }
+    }
+    
+    func longestCommonPrefix_14_best(_ strs: [String]) -> String {
+        let count = strs.count
+        
+        if count == 0 {
+            return ""
+        }
+        if count == 1 {
+            return strs.first!
+        }
+        
+        var result = strs.first!
+        for i in 1..<count {
+            while !strs[i].hasPrefix(result) {
+                result = String(result.prefix(result.count - 1))
+                if result.count == 0 {
+                    return ""
+                }
+            }
+        }
+        return result
+    }
+    
+    // MARK: - 20. 有效的括号
+    
+    func isValid_20(_ s: String) -> Bool {
+        if s.count % 2 != 0 {
+            return false
+        }
+        if s.count == 0 {
+            return true
+        }
+        var list = [Character]()
+        for index in s.indices {
+            let char = s[index]
+            if char == "{" || char == "(" || char == "[" {
+                list.append(char)
+            } else {
+                switch char {
+                case "}":
+                    if list.last == "{" {
+                        list.removeLast()
+                    } else {
+                        return false
+                    }
+                    break
+                case ")":
+                    if list.last == "(" {
+                        list.removeLast()
+                    } else {
+                        return false
+                    }
+                    break
+                case "]":
+                    if list.last == "[" {
+                        list.removeLast()
+                    } else {
+                        return false
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        if list.count > 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    // MARK: - 21. 合并两个有序链表
+    func mergeTwoLists_21(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var curNode1 = l1
+        var curNode2 = l2
+        var resultNode = ListNode.init(0)
+        let dummy = resultNode
+        
+        while curNode1 != nil || curNode2 != nil {
+            
+            let var1 = curNode1?.val ?? Int.max
+            let var2 = curNode2?.val ?? Int.max
+            var result = 0
+            if var1 > var2 {
+                result = (curNode2?.val)!
+                curNode2 = curNode2?.next
+            } else {
+                result = (curNode1?.val)!
+                curNode1 = curNode1?.next
+            }
+            
+            resultNode.next = ListNode.init(result)
+            resultNode = resultNode.next!
+        }
+        if curNode1 == nil {
+            resultNode.next = curNode2
+        } else if curNode2 == nil {
+            resultNode.next = curNode1
+        }
+        
+        return dummy.next
+    }
+    
+    // MARK: - 26. 删除排序数组中的重复项
+    func removeDuplicates_26(_ nums: inout [Int]) -> Int {
+        let ss = Set(nums)
+        nums = Array(ss)
+        nums.sort { (a, b) -> Bool in
+            a < b
+        }
+        return ss.count
+    }
+    
+    // MARK: - 27. 移除元素
+    func removeElement_27(_ nums: inout [Int], _ val: Int) -> Int {
+        nums = nums.filter { (num) -> Bool in
+            num != val
+        }
+        return nums.count
+    }
+    
+    // MARK: - 28. 实现strStr()
+    func strStr_28_mine(_ haystack: String, _ needle: String) -> Int {
+        if needle == "" {
+            return 0
+        }
+        let index = haystack.range(of: needle)
+        if index != nil {
+            return haystack.distance(from: haystack.startIndex, to: (index?.lowerBound)!)
+        } else {
+            return -1
+        }
+    }
+    
+    func strStr_28_best(_ haystack: String, _ needle: String) -> Int {
+        //1.判断数据为空
+        if haystack.count == 0 && needle.count > 0 {
+            return -1
+        }
+        
+        if haystack.count < needle.count {
+            return -1
+        }
+        
+        if  needle.count == 0 {
+            return 0
+        }
+        let hChars = Array(haystack.suffix(haystack.count))
+        let nChars = Array(needle.suffix(needle.count))
+        
+        let hLen = hChars.count
+        let nLen = nChars.count
+        
+        //遍历数组
+        for i in 0...hLen-nLen {
+            //判断数组中字符与needle的首字符是否相等
+            if hChars[i] == nChars[0] {
+                for j in 0..<nLen {
+                    //如果不等，直接退出
+                    if hChars[i + j] != nChars[j] {
+                        break
+                    }
+                    //如果j已经遍历到最后一位，就完全匹配，退出当前i的值
+                    if j + 1 == nLen {
+                        return i
+                    }
+                }
+            }
+        }
+        
+        return -1
+    }
+    
+    // MARK: - 35. 搜索插入位置
+    func searchInsert_35(_ nums: [Int], _ target: Int) -> Int {
+        if nums.count == 0 || target == 0 {
+            return 0
+        }
+        if target > nums.last!  {
+            return nums.count
+        }
+        var index = 0
+        for i in 0..<nums.count {
+            if target <= nums[i] {
+                index = i
+                break
+            }
+        }
+        return index
+    }
+    
+    // MARK: - 38. 报数
+    func countAndSay_38(_ n: Int) -> String {
+        if n == 1 {
+            return "1"
+        }
+        if n == 2 {
+            return "11"
+        }
+        var finalResult = "11"
+        for _ in 3...n {
+            finalResult = next(s: finalResult)
+        }
+        return finalResult
+    }
+    
+    func next(s: String) -> String{
+        var result = ""
+        var i = 0
+        while i < s.count {
+            if i == s.count - 1 {
+                result.append("1\(s[s.index(before: s.endIndex)])")
+                break
+            }
+            if s[s.index(s.startIndex, offsetBy: i)] == s[s.index(s.startIndex, offsetBy: i + 1)] {
+                if i == s.count - 2 {
+                    result.append("2\(s[s.index(s.startIndex, offsetBy: i)])")
+                    i = i + 2
+                } else {
+                    if s[s.index(s.startIndex, offsetBy: i + 1)] == s[s.index(s.startIndex, offsetBy: i + 2)] {
+                        result.append("3\(s[s.index(s.startIndex, offsetBy: i)])")
+                        i = i + 3
+                    } else {
+                        result.append("2\(s[s.index(s.startIndex, offsetBy: i)])")
+                        i = i + 2
+                    }
+                }
+            } else {
+                result.append("1\(s[s.index(s.startIndex, offsetBy: i)])")
+                i = i + 1
+            }
+        }
+        return result
+    }
+    // MARK: - 58. 最后一个单词的长度
+    func lengthOfLastWord_58(_ s: String) -> Int {
+        let tempArray = s.components(separatedBy: " ")
+        var string: String = ""
+        for i in (0..<tempArray.count).reversed() {
+            
+            if tempArray[i] != "" {
+                string = tempArray[i]
+                break
+            }
+        }
+        return string.count
+    }
+    
+    func lengthOfLastWord_58_best(_ s: String) -> Int {
+        return s.split(separator: " ").last?.count ?? 0
+    }
+    
+    
+    // MARK: - 66. 加一
+    func plusOne_68(_ digits: [Int]) -> [Int] {
+        var result = digits
+        if result.last! + 1 > 9 {
+            result[result.count - 1] = 0
+            
+            for i in (0..<result.count - 1).reversed() {
+                if result[i] + 1 > 9 {
+                    result[i] = 0
+                    if i == 0 {
+                        result.insert(1, at: 0)
+                    }
+                } else {
+                    result[i] = result[i] + 1
+                    break
+                }
+            }
+            if result.count == 1{
+                result.insert(1, at: 0)
+            }
+            return result
+        } else {
+            result[result.count - 1] = result[result.count - 1] + 1
+            return result
+        }
+    }
+    
+    func plusOne_66_best(_ digits:[Int]) -> [Int] {
+        guard digits.count != 0 else {
+            return digits
+        }
+        
+        let count = digits.count
+        var cur = count - 1
+        var result = digits
+        
+        while cur >= 0 {
+            //高位需要进位
+            if result[cur] == 9 {
+                result[cur] = 0
+            }else { //高位不需要进位
+                result[cur] += 1
+                return result
+            }
+            cur -= 1
+        }
+        //数组的首位是否为0
+        if result[0] == 0 {
+            result.insert(1, at:0)
+        }
+        
+        return result
+    }
+    
     
     // MARK: - 771. Jewels and Stones
     func numJewelsInStones_771(_ J: String, _ S: String) -> Int {
@@ -768,6 +1176,47 @@ class Solution: NSObject {
         }
         return sum - nums.min()! * nums.count
     }
+    
+    // MARK: - 70. 爬楼梯
+    func climbStairs_70_mine(_ n: Int) -> Int {
+        if n < 0 {
+            return 0
+        }
+        if n < 3 {
+            return n
+        }
+        
+        var array: Array<Int> = Array.init(repeating: 0, count: n)
+        array[0] = 1
+        array[1] = 2
+        for i in 2..<n {
+            array[i] = array[i - 1] + array[i - 2]
+        }
+        
+        return array[n-1]
+        
+    }
+    
+    func climbStairs_70_best(_ n: Int) -> Int {
+        if n <= 0 {
+            return 0
+        }
+        if n < 3 {
+            return n
+        }
+        
+        var pre = 1
+        var next = 2
+        var result = pre + next
+        for _ in 3...n {
+            result = pre + next
+            pre = next
+            next = result
+        }
+        
+        return result
+    }
+    
     //MARK:- 私有方法
     func dec2bin(_ number:Int) -> String {
         var number = number
